@@ -1,2 +1,7 @@
-name: "my-website"
-
+name: "mywebpage"  
+output_dir: "docs"  
+output:  
+  html_document:  
+    self_contained: no  
+    theme: flatly  
+navbar: 
