@@ -18,6 +18,11 @@ h1 {
     margin: 0 0 0.5em 0.5em;
 }
 
+a {
+    color: #18bc9c;
+    text-decoration: none;
+}
+
 .container-fluid.main-container {
     max-width: 600px;
     margin-left: 0;
@@ -313,4 +318,15 @@ body {
     border-width: 8px;
     border-style: solid;
     border-color: rgb(200, 200, 106);
+}
+
+pre {
+    border-width: 8px;
+    border-style: solid;
+    border-color: rgba(200, 200, 106,0);
+    transition: border-color 1s ease-in-out;
+  
+}
+.focus {
+    border-color: rgba(200, 200, 106,1);
 }
