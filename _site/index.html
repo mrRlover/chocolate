@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Daniel Teixeira - 1445920, Christian Bester - 1242913" />
+
+
+<title>I love R a whole Choco-lot</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="main.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">I love R a whole Choco-lot</h1>
+<h4 class="author">Daniel Teixeira - 1445920, Christian Bester - 1242913</h4>
+<h4 class="date">31st July 2020</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#chocolately-analysis"><span class="toc-section-number">1</span>     Chocolately analysis</a></li>
+<li><a href="#workspace-setup"><span class="toc-section-number">2</span>     Workspace setup</a><ul>
+<li><a href="#packages"><span class="toc-section-number">2.1</span>     Packages</a></li>
+<li><a href="#importing-data"><span class="toc-section-number">2.2</span>     Importing data</a></li>
+</ul></li>
+<li><a href="#data-exploration-and-manipulation"><span class="toc-section-number">3</span> Data Exploration and Manipulation</a><ul>
+<li><a href="#summary-statistics"><span class="toc-section-number">3.1</span> Summary statistics</a></li>
+<li><a href="#plotting-data"><span class="toc-section-number">3.2</span> Plotting data</a></li>
+</ul></li>
+<li><a href="#simple-regression"><span class="toc-section-number">4</span>     Simple regression</a></li>
+</ul>
+</div>
+
+<div id="chocolately-analysis" class="section level1">
+<h1><span class="header-section-number">1</span>     Chocolately analysis</h1>
+<p>Chocolate is a beloved sweet, all around the world. Who doesn’t love chocolate right? In this project we will analysing the chocolate dataset using the statistical programming language R. We happen to be lovers of both chocolate and R, so this is a sweet treat for us.</p>
+</div>
+<div id="workspace-setup" class="section level1">
+<h1><span class="header-section-number">2</span>     Workspace setup</h1>
+<p>When performing tests in a laboratory, all the tools needed for the tests on that particular day are brought out of storage and placed in the lab ready to go. R is no different, we need to prepare our laboratory for the tests to come.</p>
+<div id="packages" class="section level2">
+<h2><span class="header-section-number">2.1</span>     Packages</h2>
+<p>Packages are a compilation of functions created by third parties that extend the features of base R. Many of these packages are superfluous, but a select few have become essential.</p>
+<p>This project uses a lot of third party defined functions, so to make readers of our project aware of the packages that they would need to install to reproduce our results, we place all our library calls in the beginning, so that the code fails early. It also makes it easier and quicker to debug should a package be missing.</p>
+<pre class="r"><code>pkgs &lt;- c(&quot;ggthemes&quot;, &quot;hrbrthemes&quot;, &quot;htmltools&quot;, &quot;lubridate&quot;, &quot;tidyverse&quot;)
+sapply(pkgs, function(x) if (!require(x, character.only = TRUE)) {
+    install.packages(x, repos = &quot;https://cran.mirror.ac.za/&quot;)
+    require(x, character.only = TRUE)
+})</code></pre>
+<p>The code above programmatically checks if a package is installed before attempting to load the package. The <code class="rfunction">require </code> function is used here instead of <code class="rfunction">library</code>. This is because <code class="rfunction">require</code> returns <code class="logical">FALSE</code> and gives a warning, whereas <code class="rfunction">library</code> throws an error. Therefore, the result of <code class="rfunction">require</code> can be used to evaluate if a package is installed, so that it can be installed if it isn’t.</p>
+</div>
+<div id="importing-data" class="section level2">
+<h2><span class="header-section-number">2.2</span>     Importing data</h2>
+<p>The chocolate dataset is saved as a .csv file, which stands for comma separated values. Your file explorer might lead you to be believe that this is an excel file but it isn’t! The .csv file is really a text file where variables are separated by commas. It just so happens that the default program on many systems is a spreedsheet program.</p>
+<p>R loves working with text files, with the base <code class="rfunction">read.csv</code> function readily available to import data into R. So let us bring in our data!</p>
+<pre class="r"><code>chocolate &lt;- read.csv(&quot;chocolate.csv&quot;)</code></pre>
+</div>
+</div>
+<div id="data-exploration-and-manipulation" class="section level1">
+<h1><span class="header-section-number">3</span> Data Exploration and Manipulation</h1>
+<p>The packages have been loaded and the data has been imported, time to start getting acquainted with the chocolate dataset.</p>
+<p>We start by viewing the structure of the data.</p>
+<pre class="r"><code>str(chocolate)</code></pre>
+<pre><code>&#39;data.frame&#39;:   1795 obs. of  9 variables:
+ $ CompanyÂ...Maker.if.known.      : chr  &quot;A. Morin&quot; &quot;A. Morin&quot; &quot;A. Morin&quot; &quot;A. Morin&quot; ...
+ $ Specific.Bean.Origin.or.Bar.Name: chr  &quot;Agua Grande&quot; &quot;Kpime&quot; &quot;Atsane&quot; &quot;Akata&quot; ...
+ $ REF                             : int  1876 1676 1676 1680 1704 1315 1315 1315 1319 1319 ...
+ $ Review.Date                     : int  2016 2015 2015 2015 2015 2014 2014 2014 2014 2014 ...
+ $ Cocoa.Percent                   : chr  &quot;63%&quot; &quot;70%&quot; &quot;70%&quot; &quot;70%&quot; ...
+ $ Company.Location                : chr  &quot;France&quot; &quot;France&quot; &quot;France&quot; &quot;France&quot; ...
+ $ Rating                          : num  3.75 2.75 3 3.5 3.5 2.75 3.5 3.5 3.75 4 ...
+ $ Bean.Type                       : chr  &quot;Â &quot; &quot;Â &quot; &quot;Â &quot; &quot;Â &quot; ...
+ $ Broad.Bean.Origin               : chr  &quot;Sao Tome&quot; &quot;Togo&quot; &quot;Togo&quot; &quot;Togo&quot; ...</code></pre>
+<p>Then we use the <code class="rfunction">glimpse</code> function from <code class="rfunction">dplyr</code>, installed and loaded with the <code class="rfunction">tidyverse</code>, to see some of the observations from each column.</p>
+<pre class="r"><code>glimpse(chocolate)</code></pre>
+<pre><code>Rows: 1,795
+Columns: 9
+$ CompanyÂ...Maker.if.known.       &lt;chr&gt; &quot;A. Morin&quot;, &quot;A. Morin&quot;, &quot;A. Morin&quot;, &quot;A. ...
+$ Specific.Bean.Origin.or.Bar.Name &lt;chr&gt; &quot;Agua Grande&quot;, &quot;Kpime&quot;, &quot;Atsane&quot;, &quot;Akata...
+$ REF                              &lt;int&gt; 1876, 1676, 1676, 1680, 1704, 1315, 1315...
+$ Review.Date                      &lt;int&gt; 2016, 2015, 2015, 2015, 2015, 2014, 2014...
+$ Cocoa.Percent                    &lt;chr&gt; &quot;63%&quot;, &quot;70%&quot;, &quot;70%&quot;, &quot;70%&quot;, &quot;70%&quot;, &quot;70%&quot;...
+$ Company.Location                 &lt;chr&gt; &quot;France&quot;, &quot;France&quot;, &quot;France&quot;, &quot;France&quot;, ...
+$ Rating                           &lt;dbl&gt; 3.75, 2.75, 3.00, 3.50, 3.50, 2.75, 3.50...
+$ Bean.Type                        &lt;chr&gt; &quot;Â &quot;, &quot;Â &quot;, &quot;Â &quot;, &quot;Â &quot;, &quot;Â &quot;, &quot;Criollo&quot;,...
+$ Broad.Bean.Origin                &lt;chr&gt; &quot;Sao Tome&quot;, &quot;Togo&quot;, &quot;Togo&quot;, &quot;Togo&quot;, &quot;Per...</code></pre>
+<p>We can see that columns with strings are of type character and columns with numbers are either of type integer or double, which is good as it means R read in the data correctly.</p>
+<p>However, R, by no fault of its own, read in the Cocoa Percent column as a character. This is because of the percentage symbol, so it would not be a number. We can remove this using <code class="rfunction">gsub()</code> like so:</p>
+<pre class="r"><code>chocolate$Cocoa.Percent &lt;- gsub(&quot;%&quot;, &quot;&quot;, chocolate$Cocoa.Percent) %&gt;%
+  as.data.frame()%&gt;%
+  type_convert() %&gt;% unlist()</code></pre>
+<pre><code>Parsed with column specification:
+cols(
+  . = col_double()
+)</code></pre>
+<p>Dplyr’s <code class="rfunction">type_convert()</code> function guess the type of the data from the first 1000 observations and then converts the data to that type.</p>
+<p>Now that we’ve gotten a fill of the data, we can proceed with summary stats.</p>
+<div id="summary-statistics" class="section level2">
+<h2><span class="header-section-number">3.1</span> Summary statistics</h2>
+<p>Summary statistics provide key facts that describe the data and central tendency. It is very easy to obtain summary statistics in R with the <code class="rfunction">summary</code> function. The <code class="rfunction">summary</code> function works best with numeric variables, so we use <code class="rfunction">select_if</code> to select numeric columns only and pass them to <code class="rfunction">summary</code></p>
+<pre class="r"><code>chocolate %&gt;%
+  select_if(is.numeric) %&gt;%
+summary(chocolate)</code></pre>
+<pre><code>      REF        Review.Date   Cocoa.Percent       Rating     
+ Min.   :   5   Min.   :2006   Min.   : 42.0   Min.   :1.000  
+ 1st Qu.: 576   1st Qu.:2010   1st Qu.: 70.0   1st Qu.:2.875  
+ Median :1069   Median :2013   Median : 70.0   Median :3.250  
+ Mean   :1036   Mean   :2012   Mean   : 71.7   Mean   :3.186  
+ 3rd Qu.:1502   3rd Qu.:2015   3rd Qu.: 75.0   3rd Qu.:3.500  
+ Max.   :1952   Max.   :2017   Max.   :100.0   Max.   :5.000  </code></pre>
+</div>
+<div id="plotting-data" class="section level2">
+<h2><span class="header-section-number">3.2</span> Plotting data</h2>
+<div id="codescatter" class="prefade">
+<pre class="r"><code>ggplot(chocolate, aes(x= Review.Date, y = Rating, color = Cocoa.Percent)) + 
+  geom_point() + 
+  geom_jitter() +
+  geom_smooth(method = &#39;lm&#39;)+
+  scale_color_continuous(low = &quot;#b69885&quot;, high = &quot;#763411&quot;)+
+  theme_economist()+
+  theme(legend.key.width = unit(5, &quot;lines&quot;))</code></pre>
+</div>
+<div id="scatterplot" class="fade fadeOut">
+<p><img src="scatterplot.png" width="900" height="550" /></p>
+</div>
+<div id="scatterplotdetail" class="plotDetail">
+<p>The code above creates a scatter plot. The graph shows that reviews have become more condensed over time. Initially, the reviews were more spread out earlier on. The early years had a lot of 1 and 2 star ratings. Conversely, there hasn’t been a 5 star review since 2007.</p>
+<p>Interestingly, the cocoa percentage does not appear to have any correlation with the rating given.</p>
+</div>
+<div id="geomcodedetail" class="codedetail">
+<p>Now we will look at how the average ratings of the chocolate bars has progressed over the years. This is done with a combination of <code class="rfunction">geom_point</code> and <code class="rfunction">geom_line</code>, with the latter being used to connect the points made by the former.</p>
+</div>
+<div id="codeline" class="prefade">
+<pre class="r"><code>chocolate %&gt;%
+  group_by(Review.Date) %&gt;%
+  summarise(averageRating = mean(Rating)) %&gt;%
+  ggplot(aes(y= averageRating, x = Review.Date ))+
+  geom_point(color=&quot;#aa7e5c&quot;, aes(size=averageRating)) +
+  geom_line(group=1, color=&quot;chocolate4&quot;, size = 1.1) + 
+  theme_economist() + theme(legend.position=&quot;none&quot;, plot.title=element_text(hjust=0.5), plot.background=element_rect(fill=&quot;#F9E79F&quot;)) + 
+  labs(title=&quot;Average rating per year&quot;, x=&quot;Review Date&quot;, y=&quot;Average Rating&quot;)</code></pre>
+</div>
+<div id="linegraph" class="fade fadeOut">
+<p><img src="chocRating.png" width="900" height="550" /></p>
+</div>
+<div id="linegraphdetail" class="codedetail">
+<p>The plot shows that the average rating of chocolate bars has increased over time. Initially, the reviews dropped off steeply before increasing post 2008. The overall trend shows an uptick in ratings.</p>
+<p>The code chunk below creates a graph that shows the distribution of ratings across the years. This is important in order to see how the ratings change over the years.</p>
+<p>To create the plot, we use <code class="rfunction">geom_density()</code> to create a the density plot. Then we use <code class="rfunction">facet_wrap</code> to place each individual year density plot on its own grid.</p>
+<p>The <code class="rfunction">scale_fill_manual()</code> function is used to map custom colours to each density plot. This function is used when the specified <code>fill</code> in the <code>aes</code> call is a factor. If it was a continuous variable, we would use <code class="rfunction">scale_fill_continuous()</code>, which would require a <code>low</code> and <code>high</code> argument passed to it.</p>
+</div>
+<div id="densitycode" class="prefade">
+<pre class="r"><code>chocolate %&gt;%
+  ggplot(aes(x = Rating, fill = as.factor(Review.Date))) + 
+    geom_density(alpha = .5) + 
+    theme_minimal() +
+    theme(plot.title=element_text(hjust=0.5), plot.background=element_rect(fill=&quot;#F4F6F7&quot;))+
+    scale_fill_manual(values = c(&quot;#8253b7&quot;, &quot;#89f057&quot;, &quot;#fba31d&quot;, &quot;#0ad7f6&quot;,
+                                 &quot;#3f4143&quot;, &quot;#975228&quot;, &quot;#42652f&quot;, &quot;#cf203c&quot;,
+                                 &quot;#cf203c&quot;, &quot;#6eb3ea&quot;, &quot;#89f057&quot;, &quot;#fba31d&quot;))+
+    facet_wrap(~ as.factor(Review.Date)) + 
+    guides(fill = FALSE) + labs(x = &#39;Rating&#39;, y = &#39;Density&#39;)</code></pre>
+</div>
+<div id="densitygraph" class="fade fadeOut">
+<p><img src="densityplots.png" width="900" height="550" /></p>
+</div>
+<div id="densitydetail" class="codedetail">
+<p>The graph shows again how much the ratings change through the years. This time we can clearly see the range of ratings per year. For instance, the earlier years (2006, 2007, 2008) have a flat distribution. The later years have a much steeper distribution, showing again that the ratings have improved in recent years.</p>
+<p>Looking at the 2017 distribution, it is incredibly steeper than the other years, even the immediately prior years. What happened in 2017? Furthermore, does the projection in ratings mean that the quality of chocolate bars increased?</p>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<div id="barcode" class="prefade">
+<pre class="r"><code>chocolate %&gt;%
+  group_by(Review.Date) %&gt;% 
+  summarise(n = n()) %&gt;%
+  ggplot(aes(x=Review.Date, y=n)) + 
+    geom_bar(stat=&#39;identity&#39;, fill=&quot;#cf203c&quot;,color=&quot;black&quot;) + 
+    theme(plot.title=element_text(hjust=0.5))+
+    labs(title = &quot;Ratings count per year&quot;, x = &quot;Review Date&quot;, y = &quot;Frequency&quot;) +
+    theme(aspect.ratio = 3.9/7.2,
+        text = element_text(family = &quot;Roboto Condensed&quot;),
+        plot.margin = margin(0,0,0,0),
+        panel.background = element_rect(fill = &quot;white&quot;),
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(color = &quot;darkgrey&quot;),
+        axis.text = element_text(size = rel(1), color = &quot;gray8&quot;),
+        axis.line.x  = element_line(color = &quot;gray8&quot;),
+        axis.ticks.y = element_blank(),
+        plot.title = element_text(size = rel(1.5), hjust = 0, face = &quot;bold&quot;),
+        plot.caption = element_text(hjust = 0, size = 9))</code></pre>
+</div>
+<div id="barchart" class="fade fadeOut">
+<p><img src="barchart.png" width="900" height="550" /></p>
+</div>
+<div id="bardetail" class="codedetail">
+<p>So it out turns out that the reason why the ratings in 2017 were so high was because the number of ratings was disproportionately low. In fact, it’s the lowest number of observations of any of the years.</p>
+</div>
+</div>
+</div>
+<div id="simple-regression" class="section level1">
+<h1><span class="header-section-number">4</span>     Simple regression</h1>
+<p>We will now perform a simple regression to answer a question we had in the exploratory data analysis: Is the cocoa percentage a strong predictor in the rating given to the chocolate bar? Let’s find out.</p>
+<pre class="r"><code>model &lt;- chocolate %&gt;%
+  lm(formula = Rating ~ Cocoa.Percent)
+
+summary(model)</code></pre>
+<pre><code>
+Call:
+lm(formula = Rating ~ Cocoa.Percent, data = .)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.2071 -0.3196  0.0429  0.3178  1.7929 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    4.079388   0.126757  32.183  &lt; 2e-16 ***
+Cocoa.Percent -0.012461   0.001761  -7.076 2.12e-12 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.4717 on 1793 degrees of freedom
+Multiple R-squared:  0.02717,   Adjusted R-squared:  0.02662 
+F-statistic: 50.07 on 1 and 1793 DF,  p-value: 2.122e-12</code></pre>
+<p>The coefficient is statistically significant at the 1% level. So it looks like the percentage of cocoa in the bar does affect the rating given to the chocolate bar. However, the coefficient itself is not large in magnitude, so the effect, although present and statistically different from zero, is not a large one.</p>
+<p>And that concludes our basic R project. We hope you have enjoyed it.</p>
+<script type="text/javascript">
+const observerOptions = {
+  root: null,
+  rootMargin: "0px",
+  threshold: 0.7
+};
+
+const observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      // fade in observed elements that are in view
+      entry.target.classList.replace('fadeOut', 'fadeIn');
+      entry.target.classList.replace()
+    } else {
+      // fade out observed elements that are not in view
+      entry.target.classList.replace('fadeIn', 'fadeOut');
+    }
+  });
+}, observerOptions);
+
+const fadeElms = document.querySelectorAll('.fade');
+fadeElms.forEach(el => observer.observe(el));
+
+$(window).scroll(function() {
+  // Setting: Start fading halfway up the page
+  var startPos = 0.62;
+  
+  var endPos = 0.9
+  
+  var x = $('.prefade').scrollTop();
+
+
+  // Cache window object
+  var $w = $(window);
+
+  // Basically, we go through each element and check its relative position within the viewport
+  $('.prefade').each(function() {
+
+    // Get current relative position in viewport, based on the top edge
+    var pos = $(this).offset().top - $w.scrollTop();
+    
+    var objectBottom = $(this).offset().top + $(this).outerHeight();
+    
+    // Get viewport height
+    var vh = $w.height();
+
+    if (pos < vh * startPos) {
+      // If element has past the starting threshold, we fade it
+      $(this).find('pre').addClass("focus")
+    } else { 
+      $(this).find('pre').removeClass("focus");
+    }
+    
+  });
+});
+
+
+</script>
+<div class='triangle' style='color:#ffffff' id='corner' />
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

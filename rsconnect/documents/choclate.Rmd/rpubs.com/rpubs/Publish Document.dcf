@@ -1,0 +1,10 @@
+name: Publish Document
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/640933/a9ac22673dcb4a3ea85f5782921b8d8e
+bundleId: https://api.rpubs.com/api/v1/document/640933/a9ac22673dcb4a3ea85f5782921b8d8e
+url: http://rpubs.com/r_is_the_best/640933/edit
+when: 1595196904.37625
